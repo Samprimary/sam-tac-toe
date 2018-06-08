@@ -1,17 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Example</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+  <title>Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Do not add `link` tags-->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <!-- Do not add `script` tags-->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
+<body class="container">
+<center>
+<div class="outer-padding">
+  <h1>Minimum Viable Product Tac Toe</h1>
+  <div class="tile-padding">
+    <div class="tiles" id="A1">
+      <h1>A1</h1>
+    </div>
+    <div class="tiles" id="A2">
+      <h1>A2</h1>
+    </div>
+    <div class="tiles" id="A3">
+      <h1>A3</h1>
+    </div>
+    <div class="clear"></div>
 
-      <!-- Do not add `link` tags-->
-      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <div class="tiles" id="B1">
+      <h1>B1</h1>
+    </div>
+    <div class="tiles" id="B2">
+      <h1>B2</h1>
+    </div>
+    <div class="tiles" id="B3">
+      <h1>B3</h1>
+    </div>
+    <div class="clear"></div>
 
-      <!-- Do not add `script` tags-->
-      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-    <body>
-      <h1>Browser Template</h1>
+    <div class="tiles" id="C1">
+      <h1>C1</h1>
+    </div>
+    <div class="tiles" id="C2">
+      <h1>C2</h1>
+    </div>
+    <div class="tiles" id="C3">
+      <h1>C3</h1>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="tan-line">
+  </div>
+  <div class="authentications-padding">
+  <form id='sign-in-form'>
+              <input name="credentials[email]" type="email" placeholder="Enter Username">
+              <input name="credentials[password]" type="password" placeholder="Enter Password">
+              <button type="submit">Sign In</button>
+            </form>
+  <form id='sign-up-form'>
+    <input name="credentials[email]" type="email" placeholder="Enter Username">
+    <input name="credentials[password]" type="password" placeholder="Enter Password">
+    <input name="credentials[password_confirmation]" type="password" placeholder="Confirm Password">
+    <button type="submit">Sign Up</button>
+  </form>
+  <form id='change-password-form'>
+    <input name="passwords[old]" type="password" placeholder="Old Password">
+    <input name="passwords[new]" type="password" placeholder="New Password">
+    <input name="credentials[password_confirmation]" type="password" placeholder="Confirm Password">
+    <button type="submit">Change password</button>
+  </form>
+    <form id='sign-out-form'>
+      <button type="submit">Sign Out</button>
+    </form>
+  </div>
+</center>
     </body>
 </html>
