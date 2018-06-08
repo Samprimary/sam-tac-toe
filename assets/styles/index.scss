@@ -4,19 +4,18 @@ p {
   background-color: green;
 }
 
-h1 {
+h1, h4 {
   font-family: "Helvetica", arial;
   color: gray;
 }
 
 .outer-padding {
-  padding: 50px;
   background-color: $very-light-gray;
   border: 1px;
   justify-content: center;
   align-items: center;
   align-self: center;
-  max-width: 60%;
+    // max-width: 60%;
 }
 
 .tile-padding {
