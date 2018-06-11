@@ -18,6 +18,10 @@ h3 {
   }
 }
 
+#announcer {
+  color: $soft-tan;
+}
+
 .form-text,
 h4 {
   color: $standard-gray;
@@ -83,6 +87,7 @@ h4 {
   float: left;
   text-align: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 div.tiles:hover {

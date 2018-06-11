@@ -2,7 +2,7 @@
 
 // use require with a reference to bundle the file and use it in this file
 // const example = require('./example')
-const authEvents = require('./events')
+// const authEvents = require('./events') !!!!!
 // use require without a reference to ensure a file is bundled
 // require('./example')
 
@@ -45,8 +45,40 @@ $(() => {
     // celebrate whoever won?
     // whomever?
     $('#reset-button').html(`<h3>Game Over!</h3>
-    <h3><button id="continue-reset" type="submit">Play Again</button></h3>
+    <h3><button id="continue-reset" type="button">Play Again</button></h3>
     `)
+    $('#continue-reset').click(function () {
+      $('#A1').html('<H1>A1</H1>')
+      $('#A2').html('<H1>A2</H1>')
+      $('#A3').html('<H1>A3</H1>')
+      $('#B1').html('<H1>B1</H1>')
+      $('#B2').html('<H1>B2</H1>')
+      $('#B3').html('<H1>B3</H1>')
+      $('#C1').html('<H1>C1</H1>')
+      $('#C2').html('<H1>C2</H1>')
+      $('#C3').html('<H1>C3</H1>')
+      a1 = 0 // all tiles start as value 0 for free tile
+      a2 = 0 // value of 1 will indicate owned by X
+      a3 = 0 // value of 2 will indicate owned by O
+      b1 = 0 // this was previously x and o turn
+      b2 = 0
+      b3 = 0
+      c1 = 0
+      c2 = 0
+      c3 = 0
+      a1clicked = false // all tiles reset to unclicked
+      a2clicked = false
+      a3clicked = false
+      b1clicked = false
+      b2clicked = false
+      b3clicked = false
+      c1clicked = false
+      c2clicked = false
+      c3clicked = false
+      boardLock = false
+      turnsTaken = 0
+      $('#reset-button').html('')
+    })
   }
 
   const winCheck = function () {
@@ -58,12 +90,18 @@ $(() => {
       console.log("X's wins now total " + xWins)
       turnsTaken = 0
       boardLock = true
+      $('#A1').html('<img src=xwingraphic.png>')
+      $('#A2').html('<img src=xwingraphic.png>')
+      $('#A3').html('<img src=xwingraphic.png>')
       resetBoard()
     } else if (a1 === 2 && a2 === 2 && a3 === 2) {
       console.log('O wins!')
       oWins++
       console.log("0's wins now total " + oWins)
       boardLock = true
+      $('#A1').html('<img src=owingraphic.png>')
+      $('#A2').html('<img src=owingraphic.png>')
+      $('#A3').html('<img src=owingraphic.png>')
       resetBoard()
     }
 
@@ -73,13 +111,19 @@ $(() => {
       xWins++
       console.log("X's wins now total " + xWins)
       boardLock = true
+      $('#B1').html('<img src=xwingraphic.png>')
+      $('#B2').html('<img src=xwingraphic.png>')
+      $('#B3').html('<img src=xwingraphic.png>')
       resetBoard()
     } else if (b1 === 2 && b2 === 2 && b3 === 2) {
       console.log('O wins!')
       oWins++
       console.log("0's wins now total " + oWins)
-      resetBoard()
       boardLock = true
+      $('#B1').html('<img src=owingraphic.png>')
+      $('#B2').html('<img src=owingraphic.png>')
+      $('#B3').html('<img src=owingraphic.png>')
+      resetBoard()
     }
 
     //C1-C2-C3 THIRD ROW HORIZONTAL WIN CHECK
@@ -88,12 +132,18 @@ $(() => {
       xWins++
       console.log("X's wins now total " + xWins)
       boardLock = true
+      $('#C1').html('<img src=xwingraphic.png>')
+      $('#C2').html('<img src=xwingraphic.png>')
+      $('#C3').html('<img src=xwingraphic.png>')
       resetBoard()
     } else if (c1 === 2 && c2 === 2 && c3 === 2) {
       console.log('O wins!')
       oWins++
       console.log("0's wins now total " + oWins)
       boardLock = true
+      $('#C1').html('<img src=owingraphic.png>')
+      $('#C2').html('<img src=owingraphic.png>')
+      $('#C3').html('<img src=owingraphic.png>')
       resetBoard()
     }
 
@@ -103,12 +153,18 @@ $(() => {
       xWins++
       console.log("X's wins now total " + xWins)
       boardLock = true
+      $('#A1').html('<img src=xwingraphic.png>')
+      $('#B1').html('<img src=xwingraphic.png>')
+      $('#C1').html('<img src=xwingraphic.png>')
       resetBoard()
     } else if (a1 === 2 && b1 === 2 && c1 === 2) {
       console.log("O wins!")
       oWins++
       console.log("0's wins now total " + oWins )
       boardLock = true
+      $('#A1').html('<img src=owingraphic.png>')
+      $('#B1').html('<img src=owingraphic.png>')
+      $('#C1').html('<img src=owingraphic.png>')
       resetBoard()
     }
 
@@ -118,6 +174,9 @@ $(() => {
       xWins++
       console.log("X's wins now total " + xWins)
       boardLock = true
+      $('#A2').html('<img src=xwingraphic.png>')
+      $('#B2').html('<img src=xwingraphic.png>')
+      $('#C2').html('<img src=xwingraphic.png>')
       resetBoard()
     }
     else if ( a2 === 2 && b2 === 2 && c2 === 2 ) {
@@ -125,6 +184,9 @@ $(() => {
       oWins++
       console.log("0's wins now total " + oWins)
       boardLock = true
+      $('#A2').html('<img src=owingraphic.png>')
+      $('#B2').html('<img src=owingraphic.png>')
+      $('#C2').html('<img src=owingraphic.png>')
       resetBoard()
     }
 
@@ -134,6 +196,9 @@ $(() => {
       xWins++
       console.log("X's wins now total " + xWins)
       boardLock = true
+      $('#A3').html('<img src=xwingraphic.png>')
+      $('#B3').html('<img src=xwingraphic.png>')
+      $('#C3').html('<img src=xwingraphic.png>')
       resetBoard()
     }
     else if ( a3 === 2 && b3 === 2 && c3 === 2 ) {
@@ -141,6 +206,9 @@ $(() => {
       oWins++
       console.log("0's wins now total " + oWins)
       boardLock = true
+      $('#A3').html('<img src=owingraphic.png>')
+      $('#B3').html('<img src=owingraphic.png>')
+      $('#C3').html('<img src=owingraphic.png>')
       resetBoard()
     }
 
@@ -150,6 +218,9 @@ $(() => {
       xWins++
       console.log("X's wins now total " + xWins)
       boardLock = true
+      $('#A1').html('<img src=xwingraphic.png>')
+      $('#B2').html('<img src=xwingraphic.png>')
+      $('#C3').html('<img src=xwingraphic.png>')
       resetBoard()
     }
     else if ( a1 === 2 && b2 === 2 && c3 === 2 ) {
@@ -157,6 +228,9 @@ $(() => {
       oWins++
       console.log("0's wins now total " + oWins)
       boardLock = true
+      $('#A1').html('<img src=owingraphic.png>')
+      $('#B2').html('<img src=owingraphic.png>')
+      $('#C3').html('<img src=owingraphic.png>')
       resetBoard()
     }
 
@@ -166,6 +240,9 @@ $(() => {
       xWins++
       console.log("X's wins now total " + xWins)
       boardLock = true
+      $('#C1').html('<img src=xwingraphic.png>')
+      $('#B2').html('<img src=xwingraphic.png>')
+      $('#A3').html('<img src=xwingraphic.png>')
       resetBoard()
     }
     else if ( c1 === 2 && b2 === 2 && a3 === 2 ) {
@@ -173,6 +250,9 @@ $(() => {
       oWins++
       console.log("0's wins now total " + oWins)
       boardLock = true
+      $('#C1').html('<img src=owingraphic.png>')
+      $('#B2').html('<img src=owingraphic.png>')
+      $('#A3').html('<img src=owingraphic.png>')
       resetBoard()
     }
 
@@ -186,44 +266,6 @@ $(() => {
     } else {
       console.log('Next turn please!')
     }
-  }
-
-$('#continue-reset').click(function(event) {
-  event.preventDefault()
-  onRestartGame
-})
-
-const onRestartGame = function(event) {
-    event.preventDefault()
-    $('#A1').html('<H3>A1</H3>')
-    $('#A2').html('<H3>A2</H3>')
-    $('#A3').html('<H3>A3</H3>')
-    $('#B1').html('<H3>B1</H3>')
-    $('#B2').html('<H3>B2</H3>')
-    $('#B3').html('<H3>B3</H3>')
-    $('#C1').html('<H3>C1</H3>')
-    $('#C2').html('<H3>C2</H3>')
-    $('#C3').html('<H3>C3</H3>')
-    a1 = 0 // all tiles start as value 0 for free tile
-    a2 = 0 // value of 1 will indicate owned by X
-    a3 = 0 // value of 2 will indicate owned by O
-    b1 = 0 // this was previously x and o turn
-    b2 = 0
-    b3 = 0
-    c1 = 0
-    c2 = 0
-    c3 = 0
-    a1clicked = false // all tiles reset to unclicked
-    a2clicked = false
-    a3clicked = false
-    b1clicked = false
-    b2clicked = false
-    b3clicked = false
-    c1clicked = false
-    c2clicked = false
-    c3clicked = false
-    boardLock = false
-    turnsTaken = 0
   }
 
   $('#A1').click(function () {
