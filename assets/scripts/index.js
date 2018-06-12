@@ -13,12 +13,14 @@ $(() => {
   // these get replaced later with API stuff
   // let xSelect// x has selected a tile (may need to string)
   // let oSelect// o has selected a tile
-  // x and o select are now values
+  // xSelect and oSelect removed
+  // xSelect and oSelect changed to number values for tile variables
   // let xTurn = 0 // the turn is x's at present (may need to string)
   // let oTurn = 1 // the turn is o's at present (')
-  // xTurn and oTurn are now values of 1 and 0, gone otherwise
+  // xTurn and oTurn removed
+  // xTurn and oTurn are now values of 1 and 0 for turnPlayer
   let turnPlayer = 0 // turnPlayer switches between states 0 and 1
-  let turnsTaken = 0 // turnstaken ends draws in winCheck
+  let turnsTaken = 0 // turnsTaken ends draws in winCheck
   let a1clicked = false // all tiles start unclicked
   let a2clicked = false
   let a3clicked = false
@@ -31,7 +33,7 @@ $(() => {
   let a1 = 0 // all tiles start as value 0 for free tile
   let a2 = 0 // value of 1 will indicate owned by X
   let a3 = 0 // value of 2 will indicate owned by O
-  let b1 = 0 // this was previously  and 2
+  let b1 = 0 // this was previously x/oSelect
   let b2 = 0
   let b3 = 0
   let c1 = 0
@@ -62,6 +64,84 @@ $(() => {
     <h3><button id="continue-reset-x" type="button">X starts</button>
     <button id="continue-reset-o" type="button">O starts</button></h3>
     `)
+    $('#continue-reset-x').click(function () {
+      $('#A1').html('<H1>A1</H1>')
+      $('#A2').html('<H1>A2</H1>')
+      $('#A3').html('<H1>A3</H1>')
+      $('#B1').html('<H1>B1</H1>')
+      $('#B2').html('<H1>B2</H1>')
+      $('#B3').html('<H1>B3</H1>')
+      $('#C1').html('<H1>C1</H1>')
+      $('#C2').html('<H1>C2</H1>')
+      $('#C3').html('<H1>C3</H1>')
+      a1 = 0 // all tiles start as value 0 for free tile
+      a2 = 0 // value of 1 will indicate owned by X
+      a3 = 0 // value of 2 will indicate owned by O
+      b1 = 0 // this was previously xTurn and oTurn
+      b2 = 0
+      b3 = 0
+      c1 = 0
+      c2 = 0
+      c3 = 0
+      a1clicked = false // all tiles reset to unclicked
+      a2clicked = false
+      a3clicked = false
+      b1clicked = false
+      b2clicked = false
+      b3clicked = false
+      c1clicked = false
+      c2clicked = false
+      c3clicked = false
+      boardLock = false // board lock reset to false
+      turnsTaken = 0 // turns reset to 0
+      turnPlayer = 0 // player resets to X
+      $('#announcer').html(`X starts this round.`)
+      $('#reset-button').html('')
+    })
+    $('#continue-reset-o').click(function () {
+      $('#A1').html('<H1>A1</H1>')
+      $('#A2').html('<H1>A2</H1>')
+      $('#A3').html('<H1>A3</H1>')
+      $('#B1').html('<H1>B1</H1>')
+      $('#B2').html('<H1>B2</H1>')
+      $('#B3').html('<H1>B3</H1>')
+      $('#C1').html('<H1>C1</H1>')
+      $('#C2').html('<H1>C2</H1>')
+      $('#C3').html('<H1>C3</H1>')
+      a1 = 0 // all tiles start as value 0 for free tile
+      a2 = 0 // value of 1 will indicate owned by X
+      a3 = 0 // value of 2 will indicate owned by O
+      b1 = 0 // this was previously x and o turn
+      b2 = 0
+      b3 = 0
+      c1 = 0
+      c2 = 0
+      c3 = 0
+      a1clicked = false // all tiles reset to unclicked
+      a2clicked = false
+      a3clicked = false
+      b1clicked = false
+      b2clicked = false
+      b3clicked = false
+      c1clicked = false
+      c2clicked = false
+      c3clicked = false
+      boardLock = false
+      turnsTaken = 0
+      turnPlayer = 1 // player resets to O
+      $('#announcer').html(`O starts this round.`)
+      $('#reset-button').html('')
+    })
+  }
+
+  const resetAlert = function () {
+    // remove all injected tiles with blank
+    // reset turns to zero if wincheck does not
+    // celebrate whoever won?
+    // whomever?
+    $('#reset-button').html(`<h2>Choose Starting Player<br>
+    <button id="continue-reset-x" type="button">X starts</button>
+    <button id="continue-reset-o" type="button">O starts</button></h2>`)
     $('#continue-reset-x').click(function () {
       $('#A1').html('<H1>A1</H1>')
       $('#A2').html('<H1>A2</H1>')
@@ -279,7 +359,7 @@ $(() => {
     else if (a1 === 1 && b2 === 1 && c3 === 1) {
       console.log('X wins!')
       xWins++
-      $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
+      $('#announcer').html(`X wins! X's wins now total ${xWins}.`)
       console.log("X's wins now total " + xWins)
       boardLock = true
       $('#A1').html('<img src=xwingraphic.png>')
@@ -338,6 +418,7 @@ $(() => {
     console.log('A1, The Top Left Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
+      resetAlert()
     } else if (a1clicked === false && turnPlayer === 0) {
       a1clicked = true
       a1 = 1
@@ -367,6 +448,7 @@ $(() => {
     console.log('A2, The Top Middle Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
+      resetAlert()
     } else if (a2clicked === false && turnPlayer === 0) {
       a2clicked = true
       a2 = 1
@@ -396,6 +478,7 @@ $(() => {
     console.log('A3, The Top Left Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
+      resetAlert()
     } else if (a3clicked === false && turnPlayer === 0) {
       a3clicked = true
       a3 = 1
@@ -425,6 +508,7 @@ $(() => {
     console.log('B1, The Middle Left Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
+      resetAlert()
     } else if (b1clicked === false && turnPlayer === 0) {
       b1clicked = true
       b1 = 1
@@ -454,6 +538,7 @@ $(() => {
     console.log('B2, The PIVOTAL CENTRAL Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
+      resetAlert()
     } else if (b2clicked === false && turnPlayer === 0) {
       b2clicked = true
       b2 = 1
@@ -483,6 +568,7 @@ $(() => {
     console.log('B3, The Middle Left Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
+      resetAlert()
     } else if (b3clicked === false && turnPlayer === 0) {
       b3clicked = true
       b3 = 1
@@ -512,6 +598,7 @@ $(() => {
     console.log('C1, The Bottom Left Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
+      resetAlert()
     } else if (c1clicked === false && turnPlayer === 0) {
       c1clicked = true
       c1 = 1
@@ -541,6 +628,7 @@ $(() => {
     console.log('C2, The Bottom Middle Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
+      resetAlert()
     } else if (c2clicked === false && turnPlayer === 0) {
       c2clicked = true
       c2 = 1
@@ -570,6 +658,7 @@ $(() => {
     console.log('C3, The Bottom Left Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
+      resetAlert()
     } else if (c3clicked === false && turnPlayer === 0) {
       c3clicked = true
       c3 = 1

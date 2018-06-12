@@ -18,6 +18,39 @@ h3 {
   }
 }
 
+h2 {
+  color: $pure-white;
+  background-color: $alert-red;
+  -webkit-animation: flash linear 1s;
+  font-family: Helvetica, sans-serif;
+  width: 50%;
+  margin: 0px;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 20px;
+
+  @media only screen and (max-width: 515px) {
+    font-size: 21px;
+  }
+}
+
+.flashit{
+  color:#f2f, infinite; // color overrides correctly only if i leave like this
+	animation: flash linear 1s infinite;
+}
+
+@-webkit-keyframes flash {
+	0% { opacity: 1; }
+	50% { opacity: .1; }
+	100% { opacity: 1; }
+}
+@keyframes flash {
+	0% { opacity: 1; }
+	50% { opacity: .1; }
+	100% { opacity: 1; }
+}
+
+
 #announcer {
   color: $soft-tan;
   background-color: $standard-gray;
