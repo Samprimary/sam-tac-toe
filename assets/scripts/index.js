@@ -5,8 +5,9 @@
 // const authEvents = require('./events') !!!!!
 // use require without a reference to ensure a file is bundled
 // require('./example')
-const authTestAuth = require('./testauth') // TEST
+// const authTestAuth = require('./testauth') // TEST
 const authEvents = require('../auth/events')
+// const authUi = require('../auth/ui')
 
 $(() => {
   let oWins = 0 // how many times O won
@@ -43,15 +44,8 @@ $(() => {
   let c3 = 0
   let boardLock = true // locks board on a complete game
 
-  const didAnAuth = function () { // TEST
-    authTestAuth.testAuthFunction() // TEST
-  } // TESTTESTTESTTESTTESTTESTTESTTESTTEST
-
-  const didAnotherAuth = function () { // TEST
-    authTestAuth.testOtherAuthFunction() // TEST
-  } // TESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
-
-  $('#show-sign-up').click(function () {
+  $('#dropdown-anchor').click('#show-sign-up', function () {
+    $('#sign-up-field').html(``)
     $('#sign-up-field').html(`<form id='sign-up-form' class="forms">
         <input name="credentials[email]" type="email" placeholder="Enter Username">
         <input name="credentials[password]" type="password" placeholder="Enter Password">
@@ -61,7 +55,8 @@ $(() => {
     $('#sign-up-form').on('submit', authEvents.onSignUp)
   })
 
-  $('#show-change-password').click(function () {
+  $('#dropdown-link').click('#show-change-password', function () {
+    $('#sign-up-field').html(``)
     $('#sign-up-field').html(`<form id='change-password-form' class="forms">
         <input name="passwords[old]" type="password" placeholder="Old Password">
         <input name="passwords[new]" type="password" placeholder="New Password">
@@ -71,18 +66,18 @@ $(() => {
     $('#change-password-form').on('submit', authEvents.onChangePassword)
   })
 
-  $('#sign-in-form').on('submit', authEvents.onSignIn)
-  $('#sign-out-form').on('submit', authEvents.onSignOut)
-  $('#sign-in-form').on('submit', '#sign-out-form', authEvents.onSignOut)
-  $('#sign-up-form').on('submit', authEvents.onSignUp)
+  // $('#sign-in-form').on('submit', authEvents.onSignIn)
+  // $('#sign-up-form').on('submit', authEvents.onSignUp)
   $('#change-password-form').on('submit', authEvents.onChangePassword)
+  $('#sign-in-field').on('submit', '#sign-in-form', authEvents.onSignIn)
+  $('#sign-in-field').on('submit', '#sign-out-form', authEvents.onSignOut)
 
   $('#continue-reset-o').click(function () {
     boardLock = false
     turnPlayer = 1
     $('#announcer').html(`O starts this round.`)
     $('#reset-button').html('')
-    didAnAuth() // TEST
+    // didAnAuth() // TEST
   })
 
   $('#continue-reset-x').click(function () {
@@ -90,7 +85,7 @@ $(() => {
     turnPlayer = 0
     $('#announcer').html(`X starts this round.`)
     $('#reset-button').html('')
-    didAnotherAuth() // TEST
+    // didAnotherAuth() // TEST
   })
 
   const resetBoard = function () {

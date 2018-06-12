@@ -69,6 +69,14 @@ border-bottom: 1px solid $soft-tan;
   border-bottom: 1px solid $standard-gray;
 }
 
+#dropdown-anchor {
+  display: inline-block;
+}
+
+#dropdown-link {
+  display: inline-block;
+}
+
 #announcer {
   color: $soft-tan;
   background-color: $standard-gray;
