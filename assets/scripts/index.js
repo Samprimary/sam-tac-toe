@@ -5,6 +5,8 @@
 // const authEvents = require('./events') !!!!!
 // use require without a reference to ensure a file is bundled
 // require('./example')
+const authTestAuth = require('./testauth') // TEST
+const authEvents = require('../auth/events')
 
 $(() => {
   let oWins = 0 // how many times O won
@@ -41,11 +43,46 @@ $(() => {
   let c3 = 0
   let boardLock = true // locks board on a complete game
 
+  const didAnAuth = function () { // TEST
+    authTestAuth.testAuthFunction() // TEST
+  } // TESTTESTTESTTESTTESTTESTTESTTESTTEST
+
+  const didAnotherAuth = function () { // TEST
+    authTestAuth.testOtherAuthFunction() // TEST
+  } // TESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
+
+  $('#show-sign-up').click(function () {
+    $('#sign-up-field').html(`<form id='sign-up-form' class="forms">
+        <input name="credentials[email]" type="email" placeholder="Enter Username">
+        <input name="credentials[password]" type="password" placeholder="Enter Password">
+        <input name="credentials[password_confirmation]" type="password" placeholder="Confirm Password">
+        <button type="submit"  class="forms">Sign Up</button>
+      </form>`)
+    $('#sign-up-form').on('submit', authEvents.onSignUp)
+  })
+
+  $('#show-change-password').click(function () {
+    $('#sign-up-field').html(`<form id='change-password-form' class="forms">
+        <input name="passwords[old]" type="password" placeholder="Old Password">
+        <input name="passwords[new]" type="password" placeholder="New Password">
+        <input name="credentials[password_confirmation]" type="password" placeholder="Confirm Password">
+        <button type="submit" class="forms">Change Password</button>
+      </form>`)
+    $('#change-password-form').on('submit', authEvents.onChangePassword)
+  })
+
+  $('#sign-in-form').on('submit', authEvents.onSignIn)
+  $('#sign-out-form').on('submit', authEvents.onSignOut)
+  $('#sign-in-form').on('submit', '#sign-out-form', authEvents.onSignOut)
+  $('#sign-up-form').on('submit', authEvents.onSignUp)
+  $('#change-password-form').on('submit', authEvents.onChangePassword)
+
   $('#continue-reset-o').click(function () {
     boardLock = false
     turnPlayer = 1
     $('#announcer').html(`O starts this round.`)
     $('#reset-button').html('')
+    didAnAuth() // TEST
   })
 
   $('#continue-reset-x').click(function () {
@@ -53,6 +90,7 @@ $(() => {
     turnPlayer = 0
     $('#announcer').html(`X starts this round.`)
     $('#reset-button').html('')
+    didAnotherAuth() // TEST
   })
 
   const resetBoard = function () {
@@ -213,13 +251,10 @@ $(() => {
   }
 
   const winCheck = function () {
-
-    // A1-A2-A3 FIRST ROW HORIZONTAL WIN CHECK
     if (a1 === 1 && a2 === 1 && a3 === 1) {
-      console.log('X wins!')
+      // A1-A2-A3 FIRST ROW HORIZONTAL WIN CHECK
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
-      console.log("X's wins now total " + xWins)
       turnsTaken = 0
       boardLock = true
       $('#A1').html('<img src=xwingraphic.png>')
@@ -227,195 +262,148 @@ $(() => {
       $('#A3').html('<img src=xwingraphic.png>')
       resetBoard()
     } else if (a1 === 2 && a2 === 2 && a3 === 2) {
-      console.log('O wins!')
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
-      console.log("0's wins now total " + oWins)
       boardLock = true
       $('#A1').html('<img src=owingraphic.png>')
       $('#A2').html('<img src=owingraphic.png>')
       $('#A3').html('<img src=owingraphic.png>')
       resetBoard()
-    }
-
-    // B1-B2-B3 SECOND ROW HORIZONTAL WIN CHECK
-    else if (b1 === 1 && b2 === 1 && b3 === 1) {
-      console.log('X wins!')
+    } else if (b1 === 1 && b2 === 1 && b3 === 1) {
+      // B1-B2-B3 SECOND ROW HORIZONTAL WIN CHECK
       $('#announcer').html(`X Wins!`)
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
-      console.log("X's wins now total " + xWins)
       boardLock = true
       $('#B1').html('<img src=xwingraphic.png>')
       $('#B2').html('<img src=xwingraphic.png>')
       $('#B3').html('<img src=xwingraphic.png>')
       resetBoard()
     } else if (b1 === 2 && b2 === 2 && b3 === 2) {
-      console.log('O wins!')
       $('#announcer').html(`O Wins!`)
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
-      console.log("0's wins now total " + oWins)
       boardLock = true
       $('#B1').html('<img src=owingraphic.png>')
       $('#B2').html('<img src=owingraphic.png>')
       $('#B3').html('<img src=owingraphic.png>')
       resetBoard()
-    }
-
-    //C1-C2-C3 THIRD ROW HORIZONTAL WIN CHECK
-    else if (c1 === 1 && c2 === 1 && c3 === 1) {
-      console.log('X wins!')
+    } else if (c1 === 1 && c2 === 1 && c3 === 1) {
+      // C1-C2-C3 THIRD ROW HORIZONTAL WIN CHECK
       $('#announcer').html(`X Wins!`)
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
-      console.log("X's wins now total " + xWins)
       boardLock = true
       $('#C1').html('<img src=xwingraphic.png>')
       $('#C2').html('<img src=xwingraphic.png>')
       $('#C3').html('<img src=xwingraphic.png>')
       resetBoard()
     } else if (c1 === 2 && c2 === 2 && c3 === 2) {
-      console.log('O wins!')
       $('#announcer').html(`O Wins!`)
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
-      console.log("0's wins now total " + oWins)
       boardLock = true
       $('#C1').html('<img src=owingraphic.png>')
       $('#C2').html('<img src=owingraphic.png>')
       $('#C3').html('<img src=owingraphic.png>')
       resetBoard()
-    }
-    // A1-B1-C1 LEFT (1st) COLUMN VERTICAL WIN CHECK
-    else if (a1 === 1 && b1 === 1 && c1 === 1) {
-      console.log('X wins!')
+    } else if (a1 === 1 && b1 === 1 && c1 === 1) {
+      // A1-B1-C1 LEFT (1st) COLUMN VERTICAL WIN CHECK
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
-      console.log("X's wins now total " + xWins)
       boardLock = true
       $('#A1').html('<img src=xwingraphic.png>')
       $('#B1').html('<img src=xwingraphic.png>')
       $('#C1').html('<img src=xwingraphic.png>')
       resetBoard()
     } else if (a1 === 2 && b1 === 2 && c1 === 2) {
-      console.log('O wins!')
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
-      console.log("0's wins now total " + oWins)
       boardLock = true
       $('#A1').html('<img src=owingraphic.png>')
       $('#B1').html('<img src=owingraphic.png>')
       $('#C1').html('<img src=owingraphic.png>')
       resetBoard()
-    }
-    // A2-B2-C2 MIDDLE (2nd) COLUMN VERTICAL WIN CHECK
-    else if (a2 === 1 && b2 === 1 && c2 === 1) {
-      console.log('X wins!')
+    } else if (a2 === 1 && b2 === 1 && c2 === 1) {
+      // A2-B2-C2 MIDDLE (2nd) COLUMN VERTICAL WIN CHECK
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
-      console.log("X's wins now total " + xWins)
       boardLock = true
       $('#A2').html('<img src=xwingraphic.png>')
       $('#B2').html('<img src=xwingraphic.png>')
       $('#C2').html('<img src=xwingraphic.png>')
       resetBoard()
-    }
-    else if (a2 === 2 && b2 === 2 && c2 === 2) {
-      console.log('O wins!')
+    } else if (a2 === 2 && b2 === 2 && c2 === 2) {
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
-      console.log("0's wins now total " + oWins)
       boardLock = true
       $('#A2').html('<img src=owingraphic.png>')
       $('#B2').html('<img src=owingraphic.png>')
       $('#C2').html('<img src=owingraphic.png>')
       resetBoard()
-    }
-    // A3-B3-C3 RIGHT (3rd) COLUMN VERTICAL WIN CHECK
-    else if (a3 === 1 && b3 === 1 && c3 === 1) {
-      console.log('X wins!')
+    } else if (a3 === 1 && b3 === 1 && c3 === 1) {
+      // A3-B3-C3 RIGHT (3rd) COLUMN VERTICAL WIN CHECK
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
-      console.log("X's wins now total " + xWins)
       boardLock = true
       $('#A3').html('<img src=xwingraphic.png>')
       $('#B3').html('<img src=xwingraphic.png>')
       $('#C3').html('<img src=xwingraphic.png>')
       resetBoard()
-    }
-    else if (a3 === 2 && b3 === 2 && c3 === 2) {
-      console.log('O wins!')
+    } else if (a3 === 2 && b3 === 2 && c3 === 2) {
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
-      console.log("0's wins now total " + oWins)
       boardLock = true
       $('#A3').html('<img src=owingraphic.png>')
       $('#B3').html('<img src=owingraphic.png>')
       $('#C3').html('<img src=owingraphic.png>')
       resetBoard()
-    }
-    // A1-B2-C3 DESCENDING DIAGONAL WIN CHECK
-    else if (a1 === 1 && b2 === 1 && c3 === 1) {
-      console.log('X wins!')
+    } else if (a1 === 1 && b2 === 1 && c3 === 1) {
+      // A1-B2-C3 DESCENDING DIAGONAL WIN CHECK
       xWins++
       $('#announcer').html(`X wins! X's wins now total ${xWins}.`)
-      console.log("X's wins now total " + xWins)
       boardLock = true
       $('#A1').html('<img src=xwingraphic.png>')
       $('#B2').html('<img src=xwingraphic.png>')
       $('#C3').html('<img src=xwingraphic.png>')
       resetBoard()
-    }
-    else if (a1 === 2 && b2 === 2 && c3 === 2) {
-      console.log('O wins!')
+    } else if (a1 === 2 && b2 === 2 && c3 === 2) {
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
-      console.log("0's wins now total " + oWins)
       boardLock = true
       $('#A1').html('<img src=owingraphic.png>')
       $('#B2').html('<img src=owingraphic.png>')
       $('#C3').html('<img src=owingraphic.png>')
       resetBoard()
-    }
-    // C1-B2-A3 ASCENDING DIAGONAL WIN CHECK
-    else if (c1 === 1 && b2 === 1 && a3 === 1) {
-      console.log('X wins!')
+    } else if (c1 === 1 && b2 === 1 && a3 === 1) {
+      // C1-B2-A3 ASCENDING DIAGONAL WIN CHECK
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
-      console.log("X's wins now total " + xWins)
       boardLock = true
       $('#C1').html('<img src=xwingraphic.png>')
       $('#B2').html('<img src=xwingraphic.png>')
       $('#A3').html('<img src=xwingraphic.png>')
       resetBoard()
-    }
-    else if (c1 === 2 && b2 === 2 && a3 === 2) {
-      console.log('O wins!')
+    } else if (c1 === 2 && b2 === 2 && a3 === 2) {
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
-      console.log("0's wins now total " + oWins)
       boardLock = true
       $('#C1').html('<img src=owingraphic.png>')
       $('#B2').html('<img src=owingraphic.png>')
       $('#A3').html('<img src=owingraphic.png>')
       resetBoard()
-    }
+    } else if (turnsTaken === 9) { // it's 9 because ARRAYS START AT ZERO
     // NO WIN CONDITION, OUT OF SQUARES
-    else if (turnsTaken === 9) { // it's 9 because ARRAYS START AT ZERO
-      console.log('You ran out of moves and tied.')
       tieWins++
       $('#announcer').html(`Tie game! The board has been tied ${tieWins} times.`)
-      console.log('Number of ties now totals ' + tieWins)
       boardLock = true
       resetBoard()
     } else {
-      console.log('Next Turn Goes.')
+      // WIN CHECK FAILS, DOES NOTHING
     }
   }
 
   $('#A1').click(function () {
-    console.log('A1, The Top Left Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
       resetAlert()
@@ -424,8 +412,6 @@ $(() => {
       a1 = 1
       turnsTaken++
       turnPlayer = 1
-      console.log('X takes A1.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`X takes A1 for turn ${turnsTaken}.`)
       $('#A1').html('<img src="xgraphic.png">')
       winCheck()
@@ -434,8 +420,6 @@ $(() => {
       a1 = 2
       turnsTaken++
       turnPlayer = 0
-      console.log('O takes A1.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`0 takes A1 for turn ${turnsTaken}.`)
       $('#A1').html('<img src="ographic.png">')
       winCheck()
@@ -445,7 +429,6 @@ $(() => {
   })
 
   $('#A2').click(function () {
-    console.log('A2, The Top Middle Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
       resetAlert()
@@ -454,8 +437,6 @@ $(() => {
       a2 = 1
       turnsTaken++
       turnPlayer = 1
-      console.log('X takes A2.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`X takes A2 for turn ${turnsTaken}.`)
       $('#A2').html('<img src="xgraphic.png">')
       winCheck()
@@ -464,8 +445,6 @@ $(() => {
       a2 = 2
       turnsTaken++
       turnPlayer = 0
-      console.log('O takes A2.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`O takes A2 for turn ${turnsTaken}.`)
       $('#A2').html('<img src="ographic.png">')
       winCheck()
@@ -475,7 +454,6 @@ $(() => {
   })
 
   $('#A3').click(function () {
-    console.log('A3, The Top Left Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
       resetAlert()
@@ -484,8 +462,6 @@ $(() => {
       a3 = 1
       turnsTaken++
       turnPlayer = 1
-      console.log('X takes A3.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`X takes A3 for turn ${turnsTaken}.`)
       $('#A3').html('<img src="xgraphic.png">')
       winCheck()
@@ -494,8 +470,6 @@ $(() => {
       a3 = 2
       turnsTaken++
       turnPlayer = 0
-      console.log('O takes A3.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`O takes A3 for turn ${turnsTaken}.`)
       $('#A3').html('<img src="ographic.png">')
       winCheck()
@@ -505,7 +479,6 @@ $(() => {
   })
 
   $('#B1').click(function () {
-    console.log('B1, The Middle Left Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
       resetAlert()
@@ -514,8 +487,6 @@ $(() => {
       b1 = 1
       turnsTaken++
       turnPlayer = 1
-      console.log('X takes B1.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`X takes B1 for turn ${turnsTaken}.`)
       $('#B1').html('<img src="xgraphic.png">')
       winCheck()
@@ -524,8 +495,6 @@ $(() => {
       b1 = 2
       turnsTaken++
       turnPlayer = 0
-      console.log('O takes B1.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`0 takes B1 for turn ${turnsTaken}.`)
       $('#B1').html('<img src="ographic.png">')
       winCheck()
@@ -535,7 +504,6 @@ $(() => {
   })
 
   $('#B2').click(function () {
-    console.log('B2, The PIVOTAL CENTRAL Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
       resetAlert()
@@ -544,8 +512,6 @@ $(() => {
       b2 = 1
       turnsTaken++
       turnPlayer = 1
-      console.log('X takes B2.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`X takes the pivotal B2 for turn ${turnsTaken}!`)
       $('#B2').html('<img src="xgraphic.png">')
       winCheck()
@@ -554,8 +520,6 @@ $(() => {
       b2 = 2
       turnsTaken++
       turnPlayer = 0
-      console.log('O takes B2.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`O takes the pivotal b2 for turn ${turnsTaken}!`)
       $('#B2').html('<img src="ographic.png">')
       winCheck()
@@ -565,7 +529,6 @@ $(() => {
   })
 
   $('#B3').click(function () {
-    console.log('B3, The Middle Left Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
       resetAlert()
@@ -574,8 +537,6 @@ $(() => {
       b3 = 1
       turnsTaken++
       turnPlayer = 1
-      console.log('X takes B3.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`X takes B3 for turn ${turnsTaken}.`)
       $('#B3').html('<img src="xgraphic.png">')
       winCheck()
@@ -584,8 +545,6 @@ $(() => {
       b3 = 2
       turnsTaken++
       turnPlayer = 0
-      console.log('O takes b3.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`0 takes B3 for turn ${turnsTaken}.`)
       $('#B3').html('<img src="ographic.png">')
       winCheck()
@@ -595,7 +554,6 @@ $(() => {
   })
 
   $('#C1').click(function () {
-    console.log('C1, The Bottom Left Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
       resetAlert()
@@ -604,8 +562,6 @@ $(() => {
       c1 = 1
       turnsTaken++
       turnPlayer = 1
-      console.log('X takes C1.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`X takes C1 for turn ${turnsTaken}.`)
       $('#C1').html('<img src="xgraphic.png">')
       winCheck()
@@ -614,8 +570,6 @@ $(() => {
       c1 = 2
       turnsTaken++
       turnPlayer = 0
-      console.log('O takes C1.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`0 takes C1 for turn ${turnsTaken}.`)
       $('#C1').html('<img src="ographic.png">')
       winCheck()
@@ -625,7 +579,6 @@ $(() => {
   })
 
   $('#C2').click(function () {
-    console.log('C2, The Bottom Middle Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
       resetAlert()
@@ -634,8 +587,6 @@ $(() => {
       c2 = 1
       turnsTaken++
       turnPlayer = 1
-      console.log('X takes C2.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`X takes C2 for turn ${turnsTaken}.`)
       $('#C2').html('<img src="xgraphic.png">')
       winCheck()
@@ -644,8 +595,6 @@ $(() => {
       c2 = 2
       turnsTaken++
       turnPlayer = 0
-      console.log('O takes C2.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`O takes C2 for turn ${turnsTaken}.`)
       $('#C2').html('<img src="ographic.png">')
       winCheck()
@@ -655,7 +604,6 @@ $(() => {
   })
 
   $('#C3').click(function () {
-    console.log('C3, The Bottom Left Tile Was Clicked')
     if (boardLock === true) {
       $('#announcer').html(`Start a new game first.`)
       resetAlert()
@@ -664,8 +612,6 @@ $(() => {
       c3 = 1
       turnsTaken++
       turnPlayer = 1
-      console.log('X takes C3.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`X takes C3 for turn ${turnsTaken}.`)
       $('#C3').html('<img src="xgraphic.png">')
       winCheck()
@@ -674,8 +620,6 @@ $(() => {
       c3 = 2
       turnsTaken++
       turnPlayer = 0
-      console.log('O takes C3.')
-      console.log('Turn', turnsTaken)
       $('#announcer').html(`0 takes C3 for turn ${turnsTaken}.`)
       $('#C3').html('<img src="ographic.png">')
       winCheck()

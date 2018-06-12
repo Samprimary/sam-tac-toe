@@ -18,6 +18,11 @@ h3 {
   }
 }
 
+h4 {
+  color: $alert-red;
+  font-family: Helvetica, sans-serif;
+}
+
 h2 {
   color: $pure-white;
   background-color: $alert-red;
@@ -50,6 +55,19 @@ h2 {
 	100% { opacity: 1; }
 }
 
+.formlink {
+background: none!important;
+color: inherit;
+border: none;
+padding: 0!important;
+font: inherit;
+cursor: pointer;
+border-bottom: 1px solid $soft-tan;
+}
+
+.formlink:hover {
+  border-bottom: 1px solid $standard-gray;
+}
 
 #announcer {
   color: $soft-tan;

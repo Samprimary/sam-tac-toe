@@ -1,41 +1,55 @@
 'use strict'
 
-const store = require('../store')
+const store = require('./store')
+const api = require('./api')
+const events = require('./events')
 
-const signUpSuccess = function (signUpResponse) {
-  console.log('signUpResponse is', signUpResponse)
+const signUpSuccess = function (response) {
+    $('#login-infobox').html(`<h4>New Player Created!</h4>`)
 }
 
 const signUpError = function (error) {
-  console.log('Error in sign up response is', signUpResponse)
 }
 
 const signInSuccess = function (response) {
-  console.log('signInResponse is', response)
   store.user = response.user
+  $('#login-infobox').html(`<h4>Signed In!</h4>`)
+  $('#sign-in-field').html(`<form id='sign-out-form'>
+      <button type="submit">Sign Out</button>
+    </form>`)
+  $('#sign-in-form').on('submit', '#sign-out-form', events.onSignOut)
 }
 
 const signInError = function (error) {
-  console.log('Error in sign in response is', signInResponse)
+  $('#login-infobox').html(`<h4>There was an error.</h4>`)
 }
 
 const changePasswordSuccess = function (response) {
-  console.log('changePasswordResponse is', changePasswordResponse)
+  $('#login-infobox').html(`<h4>You successfully changed your password.</h4>`)
 }
 
 const changePasswordError = function (error) {
-  console.log('Error in password response is', changePasswordResponse)
+  $('#login-infobox').html(`<h4>There was an error.</h4>`)
 }
 
 const signOutSuccess = function (response) {
   console.log('you successfully signed out')
   delete store.user
   console.log('store after sign out is', store)
+  $('#login-infobox').html(`<h4>Signed Out!</h4>`)
 }
 
 const signOutError = function (error) {
-  console.log('Error in sign out is', signOutResponse)
+  $('#login-infobox').html(`<h4>There was an error.</h4>`)
 }
+
+  // const doSignUp = function () {
+  //   $('#sign-up-form').on('submit', events.onSignUp)
+  // }
+  //
+  // const doChangePassword = function () {
+  //   $('#change-password-form').on('submit', events.onChangePassword)
+  // }
 
 module.exports = {
   signUpSuccess: signUpSuccess,
@@ -47,4 +61,6 @@ module.exports = {
   signOutSuccess: signOutSuccess,
   signOutError: signOutError,
   store: store
+//  doSignUp: doSignUp,
+//  doChangePassword: doChangePassword
 }

@@ -1,28 +1,24 @@
 'use strict'
 
-const getFormFields = require('../../../lib/get-form-fields')
+const getFormFields = require('./get-form-fields')
 const authApi = require('./api')
 const authUi = require('./ui')
 
 const onSignUp = function (event) {
   event.preventDefault()
   console.log('the form was submitted')
-
   const data = getFormFields(event.target)
   console.log('data is', data)
   authApi.signUp(data)
-    .then(function (signUpResponse) {
-      console.log('signUpResponse is', signUpResponse)
-    })
+    .then(authUi.signUpSuccess)
+    .catch(authUi.signUpError)
 }
 
 const onSignIn = function (event) {
   event.preventDefault()
   console.log('the form was submitted')
-
   const data = getFormFields(event.target)
   console.log('data is', data)
-
   authApi.signIn(data)
     .then(authUi.signInSuccess)
     .catch(authUi.signInError)
@@ -33,17 +29,15 @@ const onChangePassword = function (event) {
   const data = getFormFields(event.target)
   console.log('Did I get data? - ', data)
   authApi.changePassword(data)
-    .then(function (changePasswordResponse) {
-      console.log('response is', changePasswordResponse)
-        .catch(console.log)
-    })
+  .then(authUi.changePasswordSuccess)
+  .catch(authUi.changePasswordError)
 }
 
 const onSignOut = function (event) {
   event.preventDefault()
   authApi.signOut()
     .then(authUi.signOutSuccess)
-    .catch(authUi.signOutSuccess)
+    .catch(authUi.signOutError)
 }
 
 module.exports = {
