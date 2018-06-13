@@ -13,12 +13,24 @@ In my game you can:
 - Log in or sign out at any time!
 - Change your password and sign up new accounts!
 
+Technologies used: HTML, CSS, AJAX, jQuery, JavaScript, CURL, others.
 
+- My planning was based around the idea that I would have to 'feel' my way through javascript concepts I still wasn't getting at the beginning of the course.
+- The method I utilized for my design was to learn about else if concepts well enough that the first thing I could do was design and write out a functional WIN CHECK system, that would test each turn for a win,
+- Making the WIN CHECK system first taught me what I was going to need
+for the rest of the program to function, and all the rest of the game was
+built around this.
+- I dwelled in CSS and HTML a long time, and tried to limit it to just
+provide visual structure and HTML element structure that would keep me
+clear on the changes I needed to make the code work in a certain way.
+- The major unsolved problem is to incorporate the online game system.
+- I have a framework for it, but it just requires days and days of coding
+from me.
+- I'll also ask more questions in the game project.
 
-
-
-
-A "First Ever Project" by "Developer" Sam
+------------
+A "First Ever Project" by Developer Sam
+------------
 
 - The data structure I will utilize will most resemble the api / events / html
 system currently being experimented with, because I will be experimenting through
