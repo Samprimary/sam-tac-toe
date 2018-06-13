@@ -1,3 +1,23 @@
+------------
+MINIMUM VIABLE PRODUCT TAC TOE
+------------
+
+a project which DOES NOT yet satisfy MVP
+
+Welcome to Tic Tac Toe! It tics, tacs, and toes.
+
+In my game you can:
+
+- Choose which player you wish to go first, X or O!
+- Have a local record of your game wins!
+- Log in or sign out at any time!
+- Change your password and sign up new accounts!
+
+
+
+
+
+
 A "First Ever Project" by "Developer" Sam
 
 - The data structure I will utilize will most resemble the api / events / html

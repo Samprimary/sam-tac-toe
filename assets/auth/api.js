@@ -22,7 +22,7 @@ const signIn = function (data) {
 }
 
 const signOut = function (data) {
-  console.log('sign out is', data)
+  // ('sign out is', data)
   return $.ajax({
     method: 'DELETE',
     url: config.apiUrl + '/sign-out',
@@ -33,8 +33,8 @@ const signOut = function (data) {
 }
 
 const changePassword = function (data) {
-  console.log('store is', store)
-  console.log('token is', store.user.token)
+  // ('store is', store)
+  // ('token is', store.user.token)
   return $.ajax({
     method: 'PATCH',
     url: config.apiUrl + '/change-password',
@@ -46,7 +46,7 @@ const changePassword = function (data) {
 }
 
 const newGame = function (event) {
-  console.log('user is ', store.user)
+  // ('user is ', store.user)
   return $.ajax({
     url: config.apiOrigin + '/games',
     method: 'POST',
@@ -57,7 +57,7 @@ const newGame = function (event) {
 }
 
 const updateGame = function (data) {
-  console.log('Token is ', store.user.token)
+  // ('Token is ', store.user.token)
   return $.ajax({
     url: config.apiOrigin + '/games/' + store.game.id,
     method: 'PATCH',

@@ -53,9 +53,9 @@ const changePasswordError = function (error) {
 }
 
 const signOutSuccess = function () {
-  console.log('you successfully signed out')
+  // ('you successfully signed out')
   delete store.user
-  console.log('store after sign out is', store)
+  // ('store after sign out is', store)
   $('#login-infobox').html(`<h4>Signed Out!</h4>`)
   signOutDisplay()
 }
@@ -66,7 +66,7 @@ const signOutError = function (error) {
 }
 
 const getGameSuccess = function (data) {
-  console.log('getGameSuccess is ', data)
+  // ('getGameSuccess is ', data)
   $('#announcer').text(data.games.length + ' games have been played!')
 }
 const getGameFailure = function () {
