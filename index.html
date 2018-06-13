@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Example</title>
+  <title>Sam Tac Toe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Do not add `link` tags-->
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
@@ -17,6 +17,11 @@
   <div id="announcer">
     Welcome to my Tic Tac Toe game! Choose who starts.
   </div>
+  <form id='reset-button' class="forms">
+    <h3>Choose Starting Player</h3>
+    <h3><button id="continue-reset-x" type="button">X starts</button>
+    <button id="continue-reset-o" type="button">O starts</button></h3>
+  </form>
   <div class="tile-padding">
     <div class="tiles" id="A1">
       <h1>A1</h1>
@@ -53,11 +58,6 @@
   </div>
   <div class="tan-line">
   </div>
-  <form id='reset-button' class="forms">
-    <h3>Choose Starting Player</h3>
-    <h3><button id="continue-reset-x" type="button">X starts</button>
-    <button id="continue-reset-o" type="button">O starts</button></h3>
-  </form>
   <div class="authentications-padding">
     <div id="login-infobox"><h4>You are playing as a guest.</h4></div>
     <div id="sign-in-field">
@@ -79,9 +79,6 @@
   </div>
   <h3>:)</h3>
 </div>
-<form id='sign-out-form'>
-  <button type="submit">Sign Out</button>
-  </form>
 </center>
 </body>
 </html>

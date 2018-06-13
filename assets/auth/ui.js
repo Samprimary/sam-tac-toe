@@ -8,7 +8,8 @@ const signInDisplay = function () {
 $('#sign-in-field').html(`<form id='sign-out-form'>
   <button type="submit">Sign Out</button>
   </form>`)
-$('#dropdown-link').html(`<h4> | <button id="show-change-password" class="formlink">Change My Password</button></h4>`)
+$('#dropdown-link').html(`<h4><button id="show-change-password" class="formlink">Change My Password</button></h4>`)
+$('#dropdown-anchor').html(``)
 $('#sign-up-field').html(``)
 //$('#sign-out-form').on('submit', events.onSignOut)
 }
@@ -20,6 +21,7 @@ const signOutDisplay = function () {
               <button type="submit"  class="forms">Sign In</button>
             </form>`)
     $('#dropdown-link').html(``)
+    $('#dropdown-anchor').html(`  <h4><button id="show-sign-up" class="formlink" type="button">Sign Up</button></h4>`)
     $('#sign-up-field').html(``)
   //$('#sign-in-field').on('submit', events.onSignIn)
   }
@@ -63,6 +65,14 @@ const signOutError = function (error) {
   signOutDisplay()
 }
 
+const getGameSuccess = function (data) {
+  console.log('getGameSuccess is ', data)
+  $('#announcer').text(data.games.length + ' games have been played!')
+}
+const getGameFailure = function () {
+  $('#announcer').html(`Error in getGame`)
+}
+
   // const doSignUp = function () {
   //   $('#sign-up-form').on('submit', events.onSignUp)
   // }
@@ -80,6 +90,10 @@ module.exports = {
   changePasswordError: changePasswordError,
   signOutSuccess: signOutSuccess,
   signOutError: signOutError,
+  // updateGameSuccess: updateGameSuccess,
+  // updateGameFailure: updateGameFailure,
+  getGameSuccess: getGameSuccess,
+  getGameFailure: getGameFailure,
   store: store
 //  doSignUp: doSignUp,
 //  doChangePassword: doChangePassword

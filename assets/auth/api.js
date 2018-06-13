@@ -45,9 +45,46 @@ const changePassword = function (data) {
   })
 }
 
+const newGame = function (event) {
+  console.log('user is ', store.user)
+  return $.ajax({
+    url: config.apiOrigin + '/games',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const updateGame = function (data) {
+  console.log('Token is ', store.user.token)
+  return $.ajax({
+    url: config.apiOrigin + '/games/' + store.game.id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: store.gameData
+  })
+}
+
+// get played games
+const getGames = function () {
+  return $.ajax({
+    url: config.apiOrigin + '/games',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signUp: signUp,
   signIn: signIn,
   signOut: signOut,
-  changePassword: changePassword
+  changePassword: changePassword,
+  newGame: newGame,
+  updateGame: updateGame,
+  getGames: getGames
 }
