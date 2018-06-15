@@ -252,17 +252,17 @@ $(() => {
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
       turnsTaken = 0
       boardLock = true
-      $('#A1').html('<img src=xwingraphic.png>')
-      $('#A2').html('<img src=xwingraphic.png>')
-      $('#A3').html('<img src=xwingraphic.png>')
+      $('#A1').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#A2').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#A3').html('<img src=https://imgur.com/M4tAucJ.png>')
       resetBoard()
     } else if (a1 === 2 && a2 === 2 && a3 === 2) {
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
       boardLock = true
-      $('#A1').html('<img src=owingraphic.png>')
-      $('#A2').html('<img src=owingraphic.png>')
-      $('#A3').html('<img src=owingraphic.png>')
+      $('#A1').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#A2').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#A3').html('<img src=https://imgur.com/aoBAFkV.png>')
       resetBoard()
     } else if (b1 === 1 && b2 === 1 && b3 === 1) {
       // B1-B2-B3 SECOND ROW HORIZONTAL WIN CHECK
@@ -270,18 +270,18 @@ $(() => {
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
       boardLock = true
-      $('#B1').html('<img src=xwingraphic.png>')
-      $('#B2').html('<img src=xwingraphic.png>')
-      $('#B3').html('<img src=xwingraphic.png>')
+      $('#B1').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#B2').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#B3').html('<img src=https://imgur.com/M4tAucJ.png>')
       resetBoard()
     } else if (b1 === 2 && b2 === 2 && b3 === 2) {
       $('#announcer').html(`O Wins!`)
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
       boardLock = true
-      $('#B1').html('<img src=owingraphic.png>')
-      $('#B2').html('<img src=owingraphic.png>')
-      $('#B3').html('<img src=owingraphic.png>')
+      $('#B1').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#B2').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#B3').html('<img src=https://imgur.com/aoBAFkV.png>')
       resetBoard()
     } else if (c1 === 1 && c2 === 1 && c3 === 1) {
       // C1-C2-C3 THIRD ROW HORIZONTAL WIN CHECK
@@ -289,103 +289,103 @@ $(() => {
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
       boardLock = true
-      $('#C1').html('<img src=xwingraphic.png>')
-      $('#C2').html('<img src=xwingraphic.png>')
-      $('#C3').html('<img src=xwingraphic.png>')
+      $('#C1').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#C2').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#C3').html('<img src=https://imgur.com/M4tAucJ.png>')
       resetBoard()
     } else if (c1 === 2 && c2 === 2 && c3 === 2) {
       $('#announcer').html(`O Wins!`)
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
       boardLock = true
-      $('#C1').html('<img src=owingraphic.png>')
-      $('#C2').html('<img src=owingraphic.png>')
-      $('#C3').html('<img src=owingraphic.png>')
+      $('#C1').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#C2').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#C3').html('<img src=https://imgur.com/aoBAFkV.png>')
       resetBoard()
     } else if (a1 === 1 && b1 === 1 && c1 === 1) {
       // A1-B1-C1 LEFT (1st) COLUMN VERTICAL WIN CHECK
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
       boardLock = true
-      $('#A1').html('<img src=xwingraphic.png>')
-      $('#B1').html('<img src=xwingraphic.png>')
-      $('#C1').html('<img src=xwingraphic.png>')
+      $('#A1').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#B1').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#C1').html('<img src=https://imgur.com/M4tAucJ.png>')
       resetBoard()
     } else if (a1 === 2 && b1 === 2 && c1 === 2) {
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
       boardLock = true
-      $('#A1').html('<img src=owingraphic.png>')
-      $('#B1').html('<img src=owingraphic.png>')
-      $('#C1').html('<img src=owingraphic.png>')
+      $('#A1').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#B1').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#C1').html('<img src=https://imgur.com/aoBAFkV.png>')
       resetBoard()
     } else if (a2 === 1 && b2 === 1 && c2 === 1) {
       // A2-B2-C2 MIDDLE (2nd) COLUMN VERTICAL WIN CHECK
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
       boardLock = true
-      $('#A2').html('<img src=xwingraphic.png>')
-      $('#B2').html('<img src=xwingraphic.png>')
-      $('#C2').html('<img src=xwingraphic.png>')
+      $('#A2').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#B2').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#C2').html('<img src=https://imgur.com/M4tAucJ.png>')
       resetBoard()
     } else if (a2 === 2 && b2 === 2 && c2 === 2) {
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
       boardLock = true
-      $('#A2').html('<img src=owingraphic.png>')
-      $('#B2').html('<img src=owingraphic.png>')
-      $('#C2').html('<img src=owingraphic.png>')
+      $('#A2').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#B2').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#C2').html('<img src=https://imgur.com/aoBAFkV.png>')
       resetBoard()
     } else if (a3 === 1 && b3 === 1 && c3 === 1) {
       // A3-B3-C3 RIGHT (3rd) COLUMN VERTICAL WIN CHECK
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
       boardLock = true
-      $('#A3').html('<img src=xwingraphic.png>')
-      $('#B3').html('<img src=xwingraphic.png>')
-      $('#C3').html('<img src=xwingraphic.png>')
+      $('#A3').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#B3').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#C3').html('<img src=https://imgur.com/M4tAucJ.png>')
       resetBoard()
     } else if (a3 === 2 && b3 === 2 && c3 === 2) {
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
       boardLock = true
-      $('#A3').html('<img src=owingraphic.png>')
-      $('#B3').html('<img src=owingraphic.png>')
-      $('#C3').html('<img src=owingraphic.png>')
+      $('#A3').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#B3').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#C3').html('<img src=https://imgur.com/aoBAFkV.png>')
       resetBoard()
     } else if (a1 === 1 && b2 === 1 && c3 === 1) {
       // A1-B2-C3 DESCENDING DIAGONAL WIN CHECK
       xWins++
       $('#announcer').html(`X wins! X's wins now total ${xWins}.`)
       boardLock = true
-      $('#A1').html('<img src=xwingraphic.png>')
-      $('#B2').html('<img src=xwingraphic.png>')
-      $('#C3').html('<img src=xwingraphic.png>')
+      $('#A1').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#B2').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#C3').html('<img src=https://imgur.com/M4tAucJ.png>')
       resetBoard()
     } else if (a1 === 2 && b2 === 2 && c3 === 2) {
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
       boardLock = true
-      $('#A1').html('<img src=owingraphic.png>')
-      $('#B2').html('<img src=owingraphic.png>')
-      $('#C3').html('<img src=owingraphic.png>')
+      $('#A1').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#B2').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#C3').html('<img src=https://imgur.com/aoBAFkV.png>')
       resetBoard()
     } else if (c1 === 1 && b2 === 1 && a3 === 1) {
       // C1-B2-A3 ASCENDING DIAGONAL WIN CHECK
       xWins++
       $('#announcer').html(`X Wins! X's wins now total ${xWins}.`)
       boardLock = true
-      $('#C1').html('<img src=xwingraphic.png>')
-      $('#B2').html('<img src=xwingraphic.png>')
-      $('#A3').html('<img src=xwingraphic.png>')
+      $('#C1').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#B2').html('<img src=https://imgur.com/M4tAucJ.png>')
+      $('#A3').html('<img src=https://imgur.com/M4tAucJ.png>')
       resetBoard()
     } else if (c1 === 2 && b2 === 2 && a3 === 2) {
       oWins++
       $('#announcer').html(`O Wins! O's wins now total ${oWins}.`)
       boardLock = true
-      $('#C1').html('<img src=owingraphic.png>')
-      $('#B2').html('<img src=owingraphic.png>')
-      $('#A3').html('<img src=owingraphic.png>')
+      $('#C1').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#B2').html('<img src=https://imgur.com/aoBAFkV.png>')
+      $('#A3').html('<img src=https://imgur.com/aoBAFkV.png>')
       resetBoard()
     } else if (turnsTaken === 9) { // it's 9 because ARRAYS START AT ZERO
     // NO WIN CONDITION, OUT OF SQUARES
@@ -408,7 +408,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes A1 for turn ${turnsTaken}.`)
-      $('#A1').html('<img src="xgraphic.png">')
+      $('#A1').html('<img src="https://imgur.com/X4mlyl0.png">')
       winCheck()
     } else if (a1clicked === false && turnPlayer === 1) {
       a1clicked = true
@@ -416,7 +416,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`0 takes A1 for turn ${turnsTaken}.`)
-      $('#A1').html('<img src="ographic.png">')
+      $('#A1').html('<img src="https://imgur.com/DvG7rh1.png">')
       winCheck()
     } else if (a1clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -433,7 +433,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes A2 for turn ${turnsTaken}.`)
-      $('#A2').html('<img src="xgraphic.png">')
+      $('#A2').html('<img src="https://imgur.com/X4mlyl0.png">')
       winCheck()
     } else if (a2clicked === false && turnPlayer === 1) {
       a2clicked = true
@@ -441,7 +441,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`O takes A2 for turn ${turnsTaken}.`)
-      $('#A2').html('<img src="ographic.png">')
+      $('#A2').html('<img src="https://imgur.com/DvG7rh1.png">')
       winCheck()
     } else if (a2clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -458,7 +458,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes A3 for turn ${turnsTaken}.`)
-      $('#A3').html('<img src="xgraphic.png">')
+      $('#A3').html('<img src="https://imgur.com/X4mlyl0.png">')
       winCheck()
     } else if (a3clicked === false && turnPlayer === 1) {
       a3clicked = true
@@ -466,7 +466,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`O takes A3 for turn ${turnsTaken}.`)
-      $('#A3').html('<img src="ographic.png">')
+      $('#A3').html('<img src="https://imgur.com/DvG7rh1.png">')
       winCheck()
     } else if (a3clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -483,7 +483,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes B1 for turn ${turnsTaken}.`)
-      $('#B1').html('<img src="xgraphic.png">')
+      $('#B1').html('<img src="https://imgur.com/X4mlyl0.png">')
       winCheck()
     } else if (b1clicked === false && turnPlayer === 1) {
       b1clicked = true
@@ -491,7 +491,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`0 takes B1 for turn ${turnsTaken}.`)
-      $('#B1').html('<img src="ographic.png">')
+      $('#B1').html('<img src="https://imgur.com/DvG7rh1.png">')
       winCheck()
     } else if (b1clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -508,7 +508,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes the pivotal B2 for turn ${turnsTaken}!`)
-      $('#B2').html('<img src="xgraphic.png">')
+      $('#B2').html('<img src="https://imgur.com/X4mlyl0.png">')
       winCheck()
     } else if (b2clicked === false && turnPlayer === 1) {
       b2clicked = true
@@ -516,7 +516,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`O takes the pivotal b2 for turn ${turnsTaken}!`)
-      $('#B2').html('<img src="ographic.png">')
+      $('#B2').html('<img src="https://imgur.com/DvG7rh1.png">')
       winCheck()
     } else if (b2clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -533,7 +533,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes B3 for turn ${turnsTaken}.`)
-      $('#B3').html('<img src="xgraphic.png">')
+      $('#B3').html('<img src="https://imgur.com/X4mlyl0.png">')
       winCheck()
     } else if (b3clicked === false && turnPlayer === 1) {
       b3clicked = true
@@ -541,7 +541,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`0 takes B3 for turn ${turnsTaken}.`)
-      $('#B3').html('<img src="ographic.png">')
+      $('#B3').html('<img src="https://imgur.com/DvG7rh1.png">')
       winCheck()
     } else if (b3clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -558,7 +558,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes C1 for turn ${turnsTaken}.`)
-      $('#C1').html('<img src="xgraphic.png">')
+      $('#C1').html('<img src="https://imgur.com/X4mlyl0.png">')
       winCheck()
     } else if (c1clicked === false && turnPlayer === 1) {
       c1clicked = true
@@ -566,7 +566,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`0 takes C1 for turn ${turnsTaken}.`)
-      $('#C1').html('<img src="ographic.png">')
+      $('#C1').html('<img src="https://imgur.com/DvG7rh1.png">')
       winCheck()
     } else if (c1clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -583,7 +583,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes C2 for turn ${turnsTaken}.`)
-      $('#C2').html('<img src="xgraphic.png">')
+      $('#C2').html('<img src="https://imgur.com/X4mlyl0.png">')
       winCheck()
     } else if (c2clicked === false && turnPlayer === 1) {
       c2clicked = true
@@ -591,7 +591,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`O takes C2 for turn ${turnsTaken}.`)
-      $('#C2').html('<img src="ographic.png">')
+      $('#C2').html('<img src="https://imgur.com/DvG7rh1.png">')
       winCheck()
     } else if (c2clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -608,7 +608,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes C3 for turn ${turnsTaken}.`)
-      $('#C3').html('<img src="xgraphic.png">')
+      $('#C3').html('<img src="https://imgur.com/X4mlyl0.png">')
       winCheck()
     } else if (c3clicked === false && turnPlayer === 1) {
       c3clicked = true
@@ -616,7 +616,7 @@ $(() => {
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`0 takes C3 for turn ${turnsTaken}.`)
-      $('#C3').html('<img src="ographic.png">')
+      $('#C3').html('<img src="https://imgur.com/DvG7rh1.png">')
       winCheck()
     } else if (c3clicked === true) {
       $('#announcer').html(`That tile is taken.`)
