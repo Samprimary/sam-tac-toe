@@ -3,6 +3,7 @@
 const store = require('./store')
 // const api = require('./api')
 const events = require('./events')
+// const reqIndex = require('../scripts/index')
 
 const signInDisplay = function () {
 $('#sign-in-field').html(`<form id='sign-out-form'>
@@ -11,7 +12,6 @@ $('#sign-in-field').html(`<form id='sign-out-form'>
 $('#dropdown-link').html(`<h4><button id="show-change-password" class="formlink">Change My Password</button></h4>`)
 $('#dropdown-anchor').html(``)
 $('#sign-up-field').html(``)
-//$('#sign-out-form').on('submit', events.onSignOut)
 }
 
 const signOutDisplay = function () {
@@ -23,7 +23,7 @@ const signOutDisplay = function () {
     $('#dropdown-link').html(``)
     $('#dropdown-anchor').html(`  <h4><button id="show-sign-up" class="formlink" type="button">Sign Up</button></h4>`)
     $('#sign-up-field').html(``)
-  //$('#sign-in-field').on('submit', events.onSignIn)
+
   }
 
 
@@ -35,9 +35,12 @@ const signUpError = function (error) {
 }
 
 const signInSuccess = function (data) {
+  loggedIn = true
   store.user = data.user
   $('#login-infobox').html(`<h4>Signed In!</h4>`)
   signInDisplay()
+  // reqIndex.resetBoard()
+  console.log('we signed in')
   }
 
 const signInError = function (error) {
@@ -58,21 +61,36 @@ const signOutSuccess = function () {
   // ('store after sign out is', store)
   $('#login-infobox').html(`<h4>Signed Out!</h4>`)
   signOutDisplay()
+  // reqIndex.resetBoard()
 }
 
 const signOutError = function (error) {
   $('#login-infobox').html(`<h4>Signed Out!</h4>`)
-  signOutDisplay()
 }
 
 const getGameSuccess = function (data) {
   // ('getGameSuccess is ', data)
-  $('#announcer').text(data.games.length + ' games have been played!')
 }
-const getGameFailure = function () {
+const getGameError = function () {
   $('#announcer').html(`Error in getGame`)
 }
 
+const updateGameSuccess = function (data) {
+  $('#announcer').html(data.games.length + ' games have been played! (this is data.games.length)')
+}
+
+const updateGameError = function (data) {
+  $('#announcer').html(data.games.length + ' games have been played! (this is data.games.length)')
+}
+
+const newGameSuccess = function (data) {
+  store.game = data
+  console.log('data is ' + data)
+}
+
+const newGameError = function (data){
+
+}
   // const doSignUp = function () {
   //   $('#sign-up-form').on('submit', events.onSignUp)
   // }
@@ -93,7 +111,11 @@ module.exports = {
   // updateGameSuccess: updateGameSuccess,
   // updateGameFailure: updateGameFailure,
   getGameSuccess: getGameSuccess,
-  getGameFailure: getGameFailure,
+  getGameError: getGameError,
+  updateGameSuccess: updateGameSuccess,
+  updateGameError: updateGameError,
+  newGameSuccess: newGameSuccess,
+  newGameError: newGameError,
   store: store
 //  doSignUp: doSignUp,
 //  doChangePassword: doChangePassword

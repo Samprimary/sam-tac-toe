@@ -7,13 +7,15 @@
 // require('./example')
 // const authTestAuth = require('./testauth') // TEST
 const authEvents = require('../auth/events')
-// const authUi = require('../auth/ui')
+const authApi = require('../auth/api')
+const authUi = require('../auth/ui')
 
 $(() => {
+  let gameArray = ['', '', '', '', '', '', '', '', '']
   let oWins = 0 // how many times O won
   let xWins = 0 // how many times X won
   let tieWins = 0 // how many ties
-  // these get replaced later with API stuff
+  // these get replaced later with authApi stuff
   // let xSelect// x has selected a tile (may need to string)
   // let oSelect// o has selected a tile
   // xSelect and oSelect removed
@@ -43,6 +45,12 @@ $(() => {
   let c2 = 0
   let c3 = 0
   let boardLock = true // locks board on a complete game
+
+  let index = 0
+  let value = 'x'
+  let over = false
+
+  let loggedIn = false // separation fix here
 
   $('#dropdown-anchor').click('#show-sign-up', function () {
     $('#sign-up-field').html(``)
@@ -98,6 +106,13 @@ $(() => {
     <button id="continue-reset-o" type="button">O starts</button></h3>
     `)
     $('#continue-reset-x').click(function () {
+      console.log('this click here.')
+      if (authUi.loggedIn === true) {
+        console.log('i was signed in.')
+        authApi.newGame()
+          .then(authUi.newGameSuccess)
+          .catch(authUi.newGameError)
+      }
       $('#A1').html('<H1>A1</H1>')
       $('#A2').html('<H1>A2</H1>')
       $('#A3').html('<H1>A3</H1>')
@@ -128,10 +143,19 @@ $(() => {
       boardLock = false // board lock reset to false
       turnsTaken = 0 // turns reset to 0
       turnPlayer = 0 // player resets to X
+      gameArray = ['', '', '', '', '', '', '', '', '']
+      over = false
       $('#announcer').html(`X starts this round.`)
       $('#reset-button').html('')
     })
     $('#continue-reset-o').click(function () {
+      console.log('this click here.')
+      if (authUi.loggedIn === true) {
+        console.log('i was signed in.')
+        authApi.newGame()
+          .then(authUi.newGameSuccess)
+          .catch(authUi.newGameError)
+      }
       $('#A1').html('<H1>A1</H1>')
       $('#A2').html('<H1>A2</H1>')
       $('#A3').html('<H1>A3</H1>')
@@ -162,6 +186,8 @@ $(() => {
       boardLock = false
       turnsTaken = 0
       turnPlayer = 1 // player resets to O
+      gameArray = ['', '', '', '', '', '', '', '', '']
+      over = false
       $('#announcer').html(`O starts this round.`)
       $('#reset-button').html('')
     })
@@ -176,6 +202,13 @@ $(() => {
     <button id="continue-reset-x" type="button">X starts</button>
     <button id="continue-reset-o" type="button">O starts</button></h2>`)
     $('#continue-reset-x').click(function () {
+      console.log('this click here.')
+      if (authUi.loggedIn === true) {
+        console.log('i was signed in.')
+        authApi.newGame()
+          .then(authUi.newGameSuccess)
+          .catch(authUi.newGameError)
+      }
       $('#A1').html('<H1>A1</H1>')
       $('#A2').html('<H1>A2</H1>')
       $('#A3').html('<H1>A3</H1>')
@@ -206,10 +239,19 @@ $(() => {
       boardLock = false // board lock reset to false
       turnsTaken = 0 // turns reset to 0
       turnPlayer = 0 // player resets to X
+      gameArray = ['', '', '', '', '', '', '', '', '']
       $('#announcer').html(`X starts this round.`)
       $('#reset-button').html('')
+      over = false
     })
     $('#continue-reset-o').click(function () {
+      console.log('this click here.')
+      if (authUi.loggedIn === true) {
+        console.log('i was signed in.')
+        authApi.newGame()
+          .then(authUi.newGameSuccess)
+          .catch(authUi.newGameError)
+      }
       $('#A1').html('<H1>A1</H1>')
       $('#A2').html('<H1>A2</H1>')
       $('#A3').html('<H1>A3</H1>')
@@ -240,6 +282,8 @@ $(() => {
       boardLock = false
       turnsTaken = 0
       turnPlayer = 1 // player resets to O
+      gameArray = ['', '', '', '', '', '', '', '', '']
+      over = false
       $('#announcer').html(`O starts this round.`)
       $('#reset-button').html('')
     })
@@ -255,6 +299,10 @@ $(() => {
       $('#A1').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#A2').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#A3').html('<img src=https://imgur.com/M4tAucJ.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (a1 === 2 && a2 === 2 && a3 === 2) {
       oWins++
@@ -263,6 +311,10 @@ $(() => {
       $('#A1').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#A2').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#A3').html('<img src=https://imgur.com/aoBAFkV.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (b1 === 1 && b2 === 1 && b3 === 1) {
       // B1-B2-B3 SECOND ROW HORIZONTAL WIN CHECK
@@ -273,6 +325,10 @@ $(() => {
       $('#B1').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#B2').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#B3').html('<img src=https://imgur.com/M4tAucJ.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (b1 === 2 && b2 === 2 && b3 === 2) {
       $('#announcer').html(`O Wins!`)
@@ -282,6 +338,10 @@ $(() => {
       $('#B1').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#B2').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#B3').html('<img src=https://imgur.com/aoBAFkV.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (c1 === 1 && c2 === 1 && c3 === 1) {
       // C1-C2-C3 THIRD ROW HORIZONTAL WIN CHECK
@@ -292,6 +352,10 @@ $(() => {
       $('#C1').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#C2').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#C3').html('<img src=https://imgur.com/M4tAucJ.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (c1 === 2 && c2 === 2 && c3 === 2) {
       $('#announcer').html(`O Wins!`)
@@ -301,6 +365,10 @@ $(() => {
       $('#C1').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#C2').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#C3').html('<img src=https://imgur.com/aoBAFkV.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (a1 === 1 && b1 === 1 && c1 === 1) {
       // A1-B1-C1 LEFT (1st) COLUMN VERTICAL WIN CHECK
@@ -310,6 +378,10 @@ $(() => {
       $('#A1').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#B1').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#C1').html('<img src=https://imgur.com/M4tAucJ.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (a1 === 2 && b1 === 2 && c1 === 2) {
       oWins++
@@ -318,6 +390,10 @@ $(() => {
       $('#A1').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#B1').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#C1').html('<img src=https://imgur.com/aoBAFkV.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (a2 === 1 && b2 === 1 && c2 === 1) {
       // A2-B2-C2 MIDDLE (2nd) COLUMN VERTICAL WIN CHECK
@@ -327,6 +403,10 @@ $(() => {
       $('#A2').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#B2').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#C2').html('<img src=https://imgur.com/M4tAucJ.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (a2 === 2 && b2 === 2 && c2 === 2) {
       oWins++
@@ -335,6 +415,10 @@ $(() => {
       $('#A2').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#B2').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#C2').html('<img src=https://imgur.com/aoBAFkV.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (a3 === 1 && b3 === 1 && c3 === 1) {
       // A3-B3-C3 RIGHT (3rd) COLUMN VERTICAL WIN CHECK
@@ -344,6 +428,10 @@ $(() => {
       $('#A3').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#B3').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#C3').html('<img src=https://imgur.com/M4tAucJ.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (a3 === 2 && b3 === 2 && c3 === 2) {
       oWins++
@@ -352,6 +440,10 @@ $(() => {
       $('#A3').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#B3').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#C3').html('<img src=https://imgur.com/aoBAFkV.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (a1 === 1 && b2 === 1 && c3 === 1) {
       // A1-B2-C3 DESCENDING DIAGONAL WIN CHECK
@@ -361,6 +453,10 @@ $(() => {
       $('#A1').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#B2').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#C3').html('<img src=https://imgur.com/M4tAucJ.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (a1 === 2 && b2 === 2 && c3 === 2) {
       oWins++
@@ -369,6 +465,10 @@ $(() => {
       $('#A1').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#B2').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#C3').html('<img src=https://imgur.com/aoBAFkV.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (c1 === 1 && b2 === 1 && a3 === 1) {
       // C1-B2-A3 ASCENDING DIAGONAL WIN CHECK
@@ -378,6 +478,10 @@ $(() => {
       $('#C1').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#B2').html('<img src=https://imgur.com/M4tAucJ.png>')
       $('#A3').html('<img src=https://imgur.com/M4tAucJ.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (c1 === 2 && b2 === 2 && a3 === 2) {
       oWins++
@@ -386,15 +490,26 @@ $(() => {
       $('#C1').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#B2').html('<img src=https://imgur.com/aoBAFkV.png>')
       $('#A3').html('<img src=https://imgur.com/aoBAFkV.png>')
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else if (turnsTaken === 9) { // it's 9 because ARRAYS START AT ZERO
     // NO WIN CONDITION, OUT OF SQUARES
       tieWins++
       $('#announcer').html(`Tie game! The board has been tied ${tieWins} times.`)
       boardLock = true
+      over = true
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
       resetBoard()
     } else {
       // WIN CHECK FAILS, DOES NOTHING
+      if (authUi.loggedIn === true) {
+        authApi.updateGame(index, value, over)
+      }
     }
   }
 
@@ -405,18 +520,32 @@ $(() => {
     } else if (a1clicked === false && turnPlayer === 0) {
       a1clicked = true
       a1 = 1
+      gameArray[0] = 'x'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes A1 for turn ${turnsTaken}.`)
       $('#A1').html('<img src="https://imgur.com/X4mlyl0.png">')
+      index = 1
+      value = 'x'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (a1clicked === false && turnPlayer === 1) {
       a1clicked = true
       a1 = 2
+      gameArray[0] = 'o'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`0 takes A1 for turn ${turnsTaken}.`)
       $('#A1').html('<img src="https://imgur.com/DvG7rh1.png">')
+      index = 1
+      value = 'o'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (a1clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -430,18 +559,32 @@ $(() => {
     } else if (a2clicked === false && turnPlayer === 0) {
       a2clicked = true
       a2 = 1
+      gameArray[1] = 'x'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes A2 for turn ${turnsTaken}.`)
       $('#A2').html('<img src="https://imgur.com/X4mlyl0.png">')
+      index = 2
+      value = 'x'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (a2clicked === false && turnPlayer === 1) {
       a2clicked = true
       a2 = 2
+      gameArray[1] = 'o'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`O takes A2 for turn ${turnsTaken}.`)
       $('#A2').html('<img src="https://imgur.com/DvG7rh1.png">')
+      index = 2
+      value = 'o'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (a2clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -455,18 +598,32 @@ $(() => {
     } else if (a3clicked === false && turnPlayer === 0) {
       a3clicked = true
       a3 = 1
+      gameArray[2] = 'x'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes A3 for turn ${turnsTaken}.`)
       $('#A3').html('<img src="https://imgur.com/X4mlyl0.png">')
+      index = 3
+      value = 'x'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (a3clicked === false && turnPlayer === 1) {
       a3clicked = true
       a3 = 2
+      gameArray[2] = 'o'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`O takes A3 for turn ${turnsTaken}.`)
       $('#A3').html('<img src="https://imgur.com/DvG7rh1.png">')
+      index = 3
+      value = 'o'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (a3clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -480,18 +637,32 @@ $(() => {
     } else if (b1clicked === false && turnPlayer === 0) {
       b1clicked = true
       b1 = 1
+      gameArray[3] = 'x'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes B1 for turn ${turnsTaken}.`)
       $('#B1').html('<img src="https://imgur.com/X4mlyl0.png">')
+      index = 4
+      value = 'x'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (b1clicked === false && turnPlayer === 1) {
       b1clicked = true
       b1 = 2
+      gameArray[3] = 'o'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`0 takes B1 for turn ${turnsTaken}.`)
       $('#B1').html('<img src="https://imgur.com/DvG7rh1.png">')
+      index = 4
+      value = 'o'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (b1clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -505,18 +676,32 @@ $(() => {
     } else if (b2clicked === false && turnPlayer === 0) {
       b2clicked = true
       b2 = 1
+      gameArray[4] = 'x'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes the pivotal B2 for turn ${turnsTaken}!`)
       $('#B2').html('<img src="https://imgur.com/X4mlyl0.png">')
+      index = 5
+      value = 'x'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (b2clicked === false && turnPlayer === 1) {
       b2clicked = true
       b2 = 2
+      gameArray[4] = 'o'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`O takes the pivotal b2 for turn ${turnsTaken}!`)
       $('#B2').html('<img src="https://imgur.com/DvG7rh1.png">')
+      index = 5
+      value = 'o'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (b2clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -530,18 +715,32 @@ $(() => {
     } else if (b3clicked === false && turnPlayer === 0) {
       b3clicked = true
       b3 = 1
+      gameArray[5] = 'x'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes B3 for turn ${turnsTaken}.`)
       $('#B3').html('<img src="https://imgur.com/X4mlyl0.png">')
+      index = 6
+      value = 'x'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (b3clicked === false && turnPlayer === 1) {
       b3clicked = true
       b3 = 2
+      gameArray[5] = 'o'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`0 takes B3 for turn ${turnsTaken}.`)
       $('#B3').html('<img src="https://imgur.com/DvG7rh1.png">')
+      index = 6
+      value = 'o'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (b3clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -555,18 +754,32 @@ $(() => {
     } else if (c1clicked === false && turnPlayer === 0) {
       c1clicked = true
       c1 = 1
+      gameArray[6] = 'x'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes C1 for turn ${turnsTaken}.`)
       $('#C1').html('<img src="https://imgur.com/X4mlyl0.png">')
+      index = 7
+      value = 'x'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (c1clicked === false && turnPlayer === 1) {
       c1clicked = true
       c1 = 2
+      gameArray[6] = 'o'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`0 takes C1 for turn ${turnsTaken}.`)
       $('#C1').html('<img src="https://imgur.com/DvG7rh1.png">')
+      index = 7
+      value = 'o'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (c1clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -580,18 +793,32 @@ $(() => {
     } else if (c2clicked === false && turnPlayer === 0) {
       c2clicked = true
       c2 = 1
+      gameArray[7] = 'x'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes C2 for turn ${turnsTaken}.`)
       $('#C2').html('<img src="https://imgur.com/X4mlyl0.png">')
+      index = 8
+      value = 'x'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (c2clicked === false && turnPlayer === 1) {
       c2clicked = true
       c2 = 2
+      gameArray[7] = 'o'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`O takes C2 for turn ${turnsTaken}.`)
       $('#C2').html('<img src="https://imgur.com/DvG7rh1.png">')
+      index = 8
+      value = 'o'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (c2clicked === true) {
       $('#announcer').html(`That tile is taken.`)
@@ -605,18 +832,32 @@ $(() => {
     } else if (c3clicked === false && turnPlayer === 0) {
       c3clicked = true
       c3 = 1
+      gameArray[8] = 'x'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 1
       $('#announcer').html(`X takes C3 for turn ${turnsTaken}.`)
       $('#C3').html('<img src="https://imgur.com/X4mlyl0.png">')
+      index = 9
+      value = 'x'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (c3clicked === false && turnPlayer === 1) {
       c3clicked = true
       c3 = 2
+      gameArray[8] = 'o'
+      console.log('game array is', gameArray)
       turnsTaken++
       turnPlayer = 0
       $('#announcer').html(`0 takes C3 for turn ${turnsTaken}.`)
       $('#C3').html('<img src="https://imgur.com/DvG7rh1.png">')
+      index = 9
+      value = '0'
+      console.log('index is' + index)
+      console.log('value is' + value)
+      console.log('over is' + over)
       winCheck()
     } else if (c3clicked === true) {
       $('#announcer').html(`That tile is taken.`)
